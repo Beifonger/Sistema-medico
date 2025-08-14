@@ -5,3 +5,4 @@ const rl = readline.createInterface({
   output: process.stdout,
 })
 
+module.exports = rl;

@@ -1,17 +1,21 @@
 const rl = require("../rl");
 
-function listar(arr){
-    console.log(`==== Pacientes ====\n`)
 
-    if(arr.length === 0){
-        console.log(`Não há paciente cadastrado!`)
-    }
+function listar(arr, confimacao, retornoAoMenu) {
+
+    if (confimacao) { console.log(`==== Pacientes ====`) }
+    if (arr.length === 0) { console.log(`Não há paciente cadastrado!`) }
+
     arr.forEach(variavelAtual => {
-        console.log(`id:${arr.id},
-        nome: ${arr.nome}, nascimento: ${arr.nascimento}
-        `)
+    console.log(`
+    id:${variavelAtual.id},
+    nome: ${variavelAtual.nome}, nascimento: ${variavelAtual.nascimento}`)
     });
-return menuPaciente(arrPaciente)
+
+    console.log(``)
+    if (confimacao) {
+        return retornoAoMenu(arr)
+    }
 }
 
 module.exports = listar;

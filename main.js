@@ -1,7 +1,9 @@
-const readline = require("readline");
+const rl = require("./rl.js")
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-})
+// Arrays
+const arrayPacientes = []
+const arrayMedicos = []
+const arrayConsultas = []
 
+// funcions
+function()

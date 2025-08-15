@@ -6,42 +6,45 @@ function pergunta(texto) {
     });
 }
 
-async function cadastrarPaciente(arr){
-    console.log("==== Cadastro ====\n")
+async function cadastrarPaciente(arr, retornoAoMenu) {
+    console.log("\n==== Cadastro ====\n")
     let nomeValido = await perguntarNome();
     let datavalida = await perguntarData();
-    const dadosDeCadastro = {id:Date.now(),nome:nomeValido, nascimento:datavalida}
+    const dadosDeCadastro = { id: Date.now(), nome: nomeValido, nascimento: datavalida }
 
     arr.push(dadosDeCadastro);
+    console.log(`cadastrado com sucesso!\n`)
+    return retornoAoMenu(arr)
 }
 
-async function perguntarNome(){
+async function perguntarNome() {
     let inputNome = await pergunta("nome: ")
-        if (!inputNome || !isNaN(inputNome)){
-            console.log(`O nome ${inputNome} não é valido como resposta!`)
-            return perguntarNome();
-        }
+    if (!inputNome || !isNaN(inputNome)) {
+        console.log(`O nome ${inputNome} não é valido como resposta!`)
+        return perguntarNome();
+    }
     return inputNome;
 }
 
-async function perguntarData(){
+async function perguntarData() {
     let inputDataNascimento = await pergunta("Data: ")
-    let data = inputDataNascimento.split("/").map(a=>parseInt(a))
+    let data = inputDataNascimento.split("/").map(a => parseInt(a))
 
     if (data.length !== 3) {
         console.log(`A data: ${inputDataNascimento} é inválida! Digite algo como (DD/MM/AAAA)`);
         return perguntarData();
     }
-    
-    for (let i = 0; i < data.length; i++){
+
+    for (let i = 0; i < data.length; i++) {
         let limite;
-        if (i === 0){limite = 31}
-        if (i === 1){limite = 12}
-        if (i === 2){limite = 20}
+        if (i === 0) { limite = 31 }
+        if (i === 1) { limite = 12 }
+        if (i === 2) { limite = 2025 }
 
         let controleDeValidação = 2
-        if(i === 2){controleDeValidação = 4}
-        if(!data[i] || isNaN(data[i]) || data[i] > controleDeValidação || data[i] <= 0 || data[i] > limite){
+        if (i === 2) { controleDeValidação = 4 }
+
+        if (!data[i] || isNaN(data[i]) || data[i].toString().length > controleDeValidação || data[i] <= 0 || data[i] > limite) {
             console.log(`A data: ${inputDataNascimento} é invalida! digte algo como (DD/MM/AAAA)`)
             return perguntarData();
         }
